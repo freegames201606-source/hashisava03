@@ -739,7 +739,6 @@ function update(dt) {
     vibrate([60, 40, 90]);
     queenBee = null;
 
-    /* 撃破した瞬間に保存（DOM更新はスタート画面/ゲームオーバーで） */
     queenbeeKills++;
     saveKills(KILL_KEY_QUEEN, queenbeeKills);
 
@@ -777,7 +776,6 @@ function update(dt) {
     addShake(18, 0.5);
     vibrate([60, 40, 120]);
 
-    /* 撃破した瞬間に保存（DOM更新はスタート画面/ゲームオーバーで） */
     redeyeKills++;
     saveKills(KILL_KEY_RED, redeyeKills);
 
@@ -1205,6 +1203,10 @@ resumeBtn.addEventListener('click', e => {
 quitBtn.addEventListener('click', e => {
   e.preventDefault(); e.stopPropagation();
   stopLoop();
+  paused = false;
+  pauseRequested = false;
+  pauseEl.classList.add('hidden');
+  speedBar.classList.add('hidden');
   try { AudioEngine.stopBGM(); AudioEngine.stopSiren(); } catch (err) {}
   showStartScreen();
 });
